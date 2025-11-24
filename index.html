@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vestigare Architecture | Media & Digital Infrastructure</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =========================================
+           1. CORE VARIABLES & RESET
+           ========================================= */
+        :root {
+            --bg-dark: #121212;
+            --bg-panel: #1E1E1E;
+            --text-main: #E0E0E0;
+            --text-muted: #A0A0A0;
+            --accent-gold: #D4AF37; /* Architectural Gold */
+            --accent-blue: #2C3E50; /* Structural Blue */
+            --white: #FFFFFF;
+            --font-heading: 'Cormorant Garamond', serif;
+            --font-body: 'Montserrat', sans-serif;
+            --transition: all 0.4s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            font-weight: 400;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+            font-weight: 300;
+            font-size: 1.05rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+            height: auto;
+        }
+
+        /* =========================================
+           2. UTILITIES
+           ========================================= */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 25px;
+        }
+
+        .section-padding {
+            padding: 120px 0;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .section-header {
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        .section-subtitle {
+            display: block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            line-height: 1.2;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 40px;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background-color: var(--accent-gold);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .btn:hover {
+            color: var(--bg-dark);
+        }
+
+        .btn:hover::after {
+            width: 100%;
+        }
+
+        /* =========================================
+           3. HEADER & NAV
+           ========================================= */
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 30px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-style: italic;
+            color: var(--white);
+        }
+
+        .logo span {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            display: block;
+            font-style: normal;
+            letter-spacing: 3px;
+            color: var(--accent-gold);
+            margin-top: -5px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        nav a {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+        }
+
+        nav a:hover {
+            opacity: 1;
+            color: var(--accent-gold);
+        }
+
+        /* =========================================
+           4. HERO SECTION
+           ========================================= */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(18,18,18,0.7), rgba(18,18,18,0.7)), url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #d0d0d0;
+            max-width: 700px;
+            margin: 0 auto 50px auto;
+        }
+
+        /* =========================================
+           5. ABOUT US
+           ========================================= */
+        .about {
+            background-color: var(--bg-dark);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            filter: grayscale(100%);
+            transition: var(--transition);
+        }
+
+        .about-image:hover img {
+            filter: grayscale(0%);
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 1px solid var(--accent-gold);
+            z-index: -1;
+        }
+
+        /* =========================================
+           6. SERVICES
+           ========================================= */
+        .services {
+            background-color: var(--bg-panel);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .service-card {
+            background: var(--bg-dark);
+            padding: 50px 30px;
+            border-bottom: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .service-icon {
+            font-size: 2rem;
+            color: var(--accent-gold);
+            margin-bottom: 25px;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        /* =========================================
+           7. ADVANTAGES (Why Choose Us)
+           ========================================= */
+        .advantages {
+            padding: var(--section-padding);
+        }
+
+        .adv-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .adv-column-text {
+            flex: 1;
+            min-width: 350px;
+            padding-right: 50px;
+        }
+
+        .adv-column-list {
+            flex: 1.2;
+            min-width: 350px;
+        }
+
+        .adv-item {
+            margin-bottom: 40px;
+            padding-left: 20px;
+            border-left: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .adv-item h4 {
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+            font-family: var(--font-body);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* =========================================
+           8. PROCESS (How We Work)
+           ========================================= */
+        .process {
+            background-color: var(--bg-panel);
+            text-align: center;
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            margin-top: 60px;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 280px;
+            max-width: 350px;
+            position: relative;
+        }
+
+        .step-number {
+            font-family: var(--font-heading);
+            font-size: 5rem;
+            color: rgba(255,255,255,0.03);
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 0;
+        }
+
+        .step-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* =========================================
+           9. CONTACT FORM
+           ========================================= */
+        .contact {
+            background-color: var(--bg-dark);
+            position: relative;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .contact-form-wrapper {
+            padding: 80px;
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .contact-info-wrapper {
+            padding: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: var(--bg-panel);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            color: var(--accent-gold);
+            letter-spacing: 1px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 15px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--white);
+            font-family: var(--font-body);
+            transition: var(--transition);
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            background: rgba(255,255,255,0.02);
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .info-item {
+            margin-bottom: 40px;
+        }
+
+        .info-item h5 {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .info-item p {
+            color: var(--white);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        /* =========================================
+           FOOTER
+           ========================================= */
+        footer {
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        footer p {
+            margin: 0;
+            color: #666;
+        }
+
+        /* =========================================
+           RESPONSIVE
+           ========================================= */
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 3rem; }
+            .about-grid, .contact-grid { grid-template-columns: 1fr; }
+            .adv-wrapper { flex-direction: column; }
+            .contact-form-wrapper, .contact-info-wrapper { padding: 40px 20px; }
+            .nav-wrapper { flex-direction: column; gap: 20px; }
+            nav ul { gap: 20px; flex-wrap: wrap; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-wrapper">
+            <div class="logo">
+                VESTIGARE
+                <span>ARCHITECTURE</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#about">Studio</a></li>
+                    <li><a href="#services">Capabilities</a></li>
+                    <li><a href="#process">Method</a></li>
+                    <li><a href="#contact">Inquiries</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Constructing Narratives <br> for the Built Environment</h1>
+            <p>Vestigare Architecture merges specialized media consulting with robust digital infrastructure, providing architects in Brazil and beyond with the platform to amplify their vision.</p>
+            <a href="#contact" class="btn">Start Your Project</a>
+        </div>
+    </section>
+
+    <section id="about" class="section-padding about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <span class="section-subtitle">Our Ethos</span>
+                    <h2 class="section-title">Where Structure Meets Signal</h2>
+                    
+                    <p>Founded by Luiza Garcia Giurni in the strategic hub of Barueri, São Paulo, VESTIGARE ARCHITECTURE operates at the unique intersection of media advisory and telecommunications services. We are not merely publicists; we are digital architects for design professionals.</p>
+                    
+                    <p>We understand that modern architecture requires more than just good design—it requires a powerful digital presence and the technical backbone to support it. Our firm specializes in translating complex architectural concepts into compelling media narratives while providing the hosting and connectivity solutions necessary to broadcast high-fidelity portfolios.</p>
+                    
+                    <p>Our team bridges the gap between the technicalities of "Internet host services" and the nuances of architectural theory. We serve as the voice and the vessel for your firm's most important projects, ensuring they reach the right audience with clarity and impact.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Architecture Firm Meeting">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="section-padding services">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-subtitle">Our Capabilities</span>
+                <h2 class="section-title">Integrated Solutions</h2>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">&#9879;</div> <h3>Digital Infrastructure & Hosting</h3>
+                    <p>Architectural portfolios are data-heavy, requiring robust bandwidth and storage for 3D renders and BIM walkthroughs. We provide specialized internet host services and wired telecommunications setups tailored to the needs of design firms, ensuring your digital assets load instantly globally.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">&#9998;</div> <h3>Media Advisory & PR</h3>
+                    <p>We craft the narrative of your practice. From writing press releases for major project unveilings to managing relationships with architectural digests, we position your firm as a thought leader. We translate blueprints into stories that resonate with the public and potential clients.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">&#128225;</div> <h3>Strategic Communications</h3>
+                    <p>Navigating the complex stakeholder landscape of urban planning requires precise communication. We develop internal and external communication strategies that align your firm’s architectural philosophy with market demands, ensuring consistency across all channels.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="advantages">
+        <div class="container">
+            <div class="adv-wrapper">
+                <div class="adv-column-text">
+                    <span class="section-subtitle">Why Partner With Us</span>
+                    <h2 class="section-title">The Vestigare Advantage</h2>
+                    <p>In a saturated market, generalist agencies fail to grasp the subtleties of the architectural profession. We speak your language.</p>
+                    <a href="#contact" class="btn">Consult with Luiza</a>
+                </div>
+
+                <div class="adv-column-list">
+                    <div class="adv-item">
+                        <h4>Industry-Specific Expertise</h4>
+                        <p>We exclusively serve architects and design firms. We understand the difference between a cantilever and a colonnade, and we know how to explain the value of your work to investors and the press.</p>
+                    </div>
+
+                    <div class="adv-item">
+                        <h4>Technical & Creative Convergence</h4>
+                        <p>Unlike traditional PR firms, we possess deep knowledge of "Wired and Wireless Telecommunications." This allows us to optimize your digital footprint from the server level up to the user interface.</p>
+                    </div>
+
+                    <div class="adv-item">
+                        <h4>Global Reach from Barueri</h4>
+                        <p>Located in one of São Paulo's key business districts, we connect Brazilian creativity with international standards of presentation and digital performance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="process" class="section-padding process">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-subtitle">Our Methodology</span>
+                <h2 class="section-title">The Blueprint for Growth</h2>
+            </div>
+
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h3>Audit & Investigation</h3>
+                        <p>True to our name "Vestigare," we begin by investigating your current media presence and technical infrastructure. We identify bottlenecks in your communication and gaps in your digital delivery.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h3>Infrastructure Architecture</h3>
+                        <p>We build the foundation. This involves setting up high-performance hosting environments for your work and developing a content strategy that aligns with your firm's aesthetic goals.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h3>Amplification & Management</h3>
+                        <p>Once the foundation is set, we launch your narrative. We manage ongoing media relations and monitor technical performance to ensure your firm remains visible and accessible.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section-padding contact">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-subtitle">Get In Touch</span>
+                <h2 class="section-title">Initiate Dialogue</h2>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-form-wrapper">
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Firm / Company</label>
+                            <input type="text" placeholder="Your Architectural Practice">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" placeholder="email@domain.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Project Scope</label>
+                            <textarea placeholder="Describe your media or infrastructure needs..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn">Submit Inquiry</button>
+                    </form>
+                </div>
+
+                <div class="contact-info-wrapper">
+                    <div class="info-item">
+                        <h5>Headquarters</h5>
+                        <p>BARUERI, SAO PAULO<br>Brazil</p>
+                    </div>
+
+                    <div class="info-item">
+                        <h5>Electronic Mail</h5>
+                        <p>info@vestigarearchitectureassessoria.info</p>
+                    </div>
+
+                    <div class="info-item">
+                        <h5>Key Principal</h5>
+                        <p>Luiza Garcia Giurni</p>
+                    </div>
+
+                    <div class="info-item">
+                        <h5>Industry Focus</h5>
+                        <p>Telecommunications, Information &<br>Media Advisory for Architects</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 VESTIGARE ARCHITECTURE ASSESSORIA DE MIDIA E COMUNICACAO PARA ARQUITETOS LTDA.</p>
+            <p>All Rights Reserved. | Designed with precision.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
